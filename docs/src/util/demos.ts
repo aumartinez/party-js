@@ -41,6 +41,16 @@ export function hearts(source: HTMLElement): void {
                     .by((t) => new party.Vector(0, 0, 100).scale(t))
                     .relative()
                     .build(),
+                new party.ModuleBuilder()
+                    .drive("opacity")
+                    .by(
+                        new party.NumericSpline(
+                            { time: 0.5, value: 1 },
+                            { time: 1, value: 0 }
+                        )
+                    )
+                    .through("relativeLifetime")
+                    .build(),
             ],
         },
         emissionOptions: {
@@ -50,13 +60,16 @@ export function hearts(source: HTMLElement): void {
             sourceSampler: party.sources.dynamicSource(source),
             angle: party.variation.range(0, 360),
 
-            initialSpeed: 400,
+            initialLifetime: party.variation.range(0.5, 1),
+            initialSpeed: party.variation.range(300, 500),
             initialColor: party.variation.gradientSample(
                 party.Gradient.simple(
                     party.Color.fromHex("#ffa68d"),
                     party.Color.fromHex("#fd3a84")
                 )
             ),
+            initialRotation: () =>
+                new party.Vector(0, 0, party.random.randomRange(0, 360)),
         },
         rendererOptions: {
             shapeFactory: heartShape,

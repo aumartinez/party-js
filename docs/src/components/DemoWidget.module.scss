@@ -1,0 +1,39 @@
+html[data-theme="light"] {
+    .demoWidget {
+        color: #403f53;
+        background: #fbfbfb;
+    }
+}
+
+.demoWidget {
+    display: flex;
+    flex-direction: row;
+    color: #f8f8f2;
+    background: #292d3e;
+    border-radius: var(--ifm-global-radius);
+    min-height: 300px;
+
+    :global {
+        .templateSelect {
+            border-right: 1px solid gray;
+
+            ul {
+                list-style: none;
+                padding: 0;
+
+                li {
+                    cursor: pointer;
+                    padding: 0.5em 2em;
+
+                    &.active {
+                        background: rgba(0, 0, 0, 0.1);
+                    }
+                }
+            }
+        }
+        .demoArea {
+            flex: 1 0;
+            cursor: pointer;
+        }
+    }
+}

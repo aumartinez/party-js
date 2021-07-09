@@ -97,25 +97,29 @@ export default function LiveCodeblock({
             {body === null ? (
                 <div ref={initialContentRef}>{children}</div>
             ) : (
-                <CodeMirror
-                    value={body}
-                    options={{
-                        theme: isDarkTheme
-                            ? "material-palenight"
-                            : "nightowl-light",
-                        mode: "javascript",
-                        indentWithTabs: true,
-                        tabSize: 4,
-                        indentUnit: 4,
-                        smartIndent: true,
-                        lineNumbers: true,
-                        // @ts-ignore
-                        matchBrackets: true,
-                        styleActiveLine: { nonEmpty: true },
-                    }}
-                    editorDidMount={(editor) => setEditor(editor)}
-                    onBeforeChange={(editor, data, value) => setBody(value)}
-                />
+                <div className="editor">
+                    <CodeMirror
+                        value={body}
+                        options={{
+                            theme: isDarkTheme
+                                ? "material-palenight"
+                                : "nightowl-light",
+                            mode: "javascript",
+                            indentWithTabs: true,
+                            tabSize: 4,
+                            indentUnit: 4,
+                            smartIndent: true,
+                            lineNumbers: true,
+                            ...{
+                                // addon config
+                                matchBrackets: true,
+                                styleActiveLine: { nonEmpty: true },
+                            },
+                        }}
+                        editorDidMount={(editor) => setEditor(editor)}
+                        onBeforeChange={(editor, data, value) => setBody(value)}
+                    />
+                </div>
             )}
 
             <div className="toolbar">
